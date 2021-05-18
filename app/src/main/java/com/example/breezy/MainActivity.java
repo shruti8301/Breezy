@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.bottomNavigation) BottomNavigationView bottomNavigation;
     @BindView(R.id.profileFloatingBtn) FloatingActionButton profileFloatingBtn;
     @BindView(R.id.nav_host_frame) FrameLayout nav_host_frame;
-    @BindView(R.id.toolbar) Toolbar main_toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
