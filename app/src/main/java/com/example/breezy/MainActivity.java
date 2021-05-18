@@ -1,49 +1,60 @@
 package com.example.breezy;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.Toolbar;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.view.Window;
-import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
+import android.widget.FrameLayout;
+
+import com.example.breezy.fragments.ChatFragment;
+import com.example.breezy.fragments.HomeFragment;
+import com.example.breezy.fragments.ProfileFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
-    private static int SPLASH_TIME_OUT=4000;
-    ImageView text;
-    ImageView logo ;
-    Animation animation,fromtop;
+
+    @BindView(R.id.bottomNavigation) BottomNavigationView bottomNavigation;
+    @BindView(R.id.profileFloatingBtn) FloatingActionButton profileFloatingBtn;
+    @BindView(R.id.nav_host_frame) FrameLayout nav_host_frame;
+    @BindView(R.id.toolbar) Toolbar main_toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_main);
 
-        logo=findViewById(R.id.splashpic);
-        text=findViewById(R.id.text);
+        ButterKnife.bind(this);
 
-        animation= AnimationUtils.loadAnimation(this,R.anim.animation);
-        fromtop=AnimationUtils.loadAnimation(this,R.anim.top);
+        profileFloatingBtn.setOnClickListener(view -> {
+            getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_frame, new ProfileFragment()).commit();
+            setItemCheckable(false);
+        });
 
-        text.setAnimation(animation);
-        logo.setAnimation(fromtop);
+        bottomNavigation.setSelectedItemId(R.id.nav_home);
+        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_frame, new HomeFragment()).commit();
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent homeIntent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(homeIntent);
-                finish();
+        bottomNavigation.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.nav_chat:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_frame, new ChatFragment()).commit();
+                    setItemCheckable(true);
+                    return true;
+
+                case R.id.nav_home:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_frame, new HomeFragment()).commit();
+                    setItemCheckable(true);
+                    return true;
             }
-        }, SPLASH_TIME_OUT);
+            return false;
+        });
+    }
+
+    private void setItemCheckable(boolean b) {
+        bottomNavigation.getMenu().getItem(0).setCheckable(b);
+        bottomNavigation.getMenu().getItem(2).setCheckable(b);
     }
 }
