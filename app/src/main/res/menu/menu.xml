@@ -2,15 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/home"
+        android:id="@+id/nav_home"
         android:title="Home"
         android:icon="@drawable/home"/>
+
     <item
-        android:id="@+id/chat"
+        android:checkable="false"
+        android:enabled="false"
+        android:title="" />
+
+    <item
+        android:id="@+id/nav_chat"
         android:title="Chat"
         android:icon="@drawable/chat"/>
-    <item
-        android:id="@+id/profile"
-        android:title="Profile"
-        android:icon="@drawable/profile"/>
 </menu>
