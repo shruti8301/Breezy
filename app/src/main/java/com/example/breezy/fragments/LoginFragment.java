@@ -37,6 +37,7 @@ public class LoginFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_login, container, false);
 
         ButterKnife.bind(this, root);
+        mAuth=FirebaseAuth.getInstance();
 
         login_email.setTranslationX(800);
         login_pass.setTranslationX(800);
