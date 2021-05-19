@@ -13,7 +13,6 @@
         android:layout_height="370dp"
         android:layout_marginTop="96dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/circlebreezy" />
@@ -22,13 +21,9 @@
         android:id="@+id/text"
         android:layout_width="266dp"
         android:layout_height="102dp"
-        android:layout_marginStart="72dp"
-        android:layout_marginEnd="73dp"
-        android:layout_marginBottom="180dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/splashpic"
         app:srcCompat="@drawable/breezy" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

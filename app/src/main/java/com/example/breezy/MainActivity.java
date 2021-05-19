@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.profileFloatingBtn) FloatingActionButton profileFloatingBtn;
     @BindView(R.id.nav_host_frame) FrameLayout nav_host_frame;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

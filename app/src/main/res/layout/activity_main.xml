@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:ignore="ContentDescription"
     tools:context=".MainActivity">
-
 
     <FrameLayout
         android:id="@+id/nav_host_frame"
@@ -64,7 +64,7 @@
             app:layout_anchor="@+id/bottomAppBar"
             app:maxImageSize="30dp"
             app:srcCompat="@drawable/circlebreezy"
-            app:tint="@null"/>
+            app:tint="@null" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

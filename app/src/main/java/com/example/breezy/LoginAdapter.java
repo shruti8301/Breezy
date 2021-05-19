@@ -6,39 +6,34 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.breezy.fragments.login_fragment;
-import com.example.breezy.fragments.signup_fragment;
+import com.example.breezy.fragments.LoginFragment;
+import com.example.breezy.fragments.SignupFragment;
 
 class LoginAdapter extends FragmentPagerAdapter {
+
     Context context;
-    int totaltabs;
+    int totalTabs;
 
-
-
-    public LoginAdapter(FragmentManager fm, Context context, int totaltabs) {
+    public LoginAdapter(FragmentManager fm, Context context, int totalTabs) {
         super(fm);
         this.context = context;
-        this.totaltabs=totaltabs;
+        this.totalTabs = totalTabs;
     }
 
     @Override
     public int getCount() {
-        return totaltabs;
+        return totalTabs;
     }
 
-    public Fragment getItem(int position)
-    {
-        switch(position){
+    public Fragment getItem(int position) {
+        switch (position) {
             case 0:
-                login_fragment login_fragment=new login_fragment();
-                return login_fragment;
+                return new LoginFragment();
             case 1:
-                signup_fragment signup_fragment=new signup_fragment();
-                return signup_fragment;
+                return new SignupFragment();
             default:
                 return null;
         }
     }
-
 
 }
