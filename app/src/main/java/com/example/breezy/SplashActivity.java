@@ -12,6 +12,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class SplashActivity extends AppCompatActivity {
 
     private static int SPLASH_TIME_OUT = 4000;
@@ -21,13 +23,13 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
 
         logo = findViewById(R.id.splashpic);
@@ -40,8 +42,14 @@ public class SplashActivity extends AppCompatActivity {
         logo.setAnimation(fromTop);
 
         new Handler().postDelayed(() -> {
-            Intent homeIntent = new Intent(SplashActivity.this, LoginActivity.class);
-            startActivity(homeIntent);
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+            if (mAuth.getCurrentUser() == null) {
+                Intent homeIntent = new Intent(SplashActivity.this, LoginActivity.class);
+                startActivity(homeIntent);
+            } else {
+                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+            }
             finish();
         }, SPLASH_TIME_OUT);
     }
