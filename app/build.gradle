@@ -39,6 +39,7 @@ dependencies {
     //UI
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation "androidx.cardview:cardview:1.0.0"
 
     //ButterKnife and Implementation
     implementation 'com.jakewharton:butterknife:10.2.3'
@@ -48,4 +49,5 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:28.0.1')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-auth:21.0.1'
+
 }

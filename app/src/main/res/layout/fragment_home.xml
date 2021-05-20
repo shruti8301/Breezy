@@ -5,17 +5,96 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.HomeFragment">
-
-    <TextView
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Home Page under Construction"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Welcome"
+      android:textSize="30sp"
+      android:textStyle="bold"
+      android:textColor="#2a2a2a"
+      android:layout_marginTop="10dp"
+      android:layout_marginLeft="10dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shruti"
+            android:id="@+id/username"
+            android:layout_marginTop="10dp"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="#2a2a2a"
+            android:layout_marginLeft="10dp"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+<ImageView
+    android:layout_width="match_parent"
+    android:layout_height="250dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="How are you feeling today?"
+            android:layout_marginLeft="20dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#3E4242"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:orientation="horizontal">
+            <androidx.cardview.widget.CardView
+                android:layout_width="65dp"
+                android:layout_marginTop="5dp"
+                android:layout_height="65dp"
+                app:cardBackgroundColor="#CED2F4"
+                app:cardCornerRadius="10dp"
+                android:layout_marginLeft="20dp">
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="65dp"
+                android:layout_marginTop="5dp"
+                android:layout_height="65dp"
+                app:cardBackgroundColor="#D1DAF3"
+                app:cardCornerRadius="10dp"
+                android:layout_marginLeft="10dp">
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="65dp"
+                android:layout_marginTop="5dp"
+                android:layout_height="65dp"
+                app:cardBackgroundColor="#CED2F4"
+                app:cardCornerRadius="10dp"
+                android:layout_marginLeft="10dp">
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="65dp"
+                android:layout_marginTop="5dp"
+                android:layout_height="65dp"
+                app:cardBackgroundColor="#CED2F4"
+                app:cardCornerRadius="10dp"
+                android:layout_marginLeft="10dp">
+            </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="65dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_height="65dp"
+                    app:cardBackgroundColor="#CED2F4"
+                    app:cardCornerRadius="10dp"
+                    android:layout_marginLeft="10dp">
+                </androidx.cardview.widget.CardView>
 
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
 </FrameLayout>
