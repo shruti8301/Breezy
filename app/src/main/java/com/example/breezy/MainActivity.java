@@ -8,8 +8,10 @@ import android.os.Bundle;
 import android.widget.FrameLayout;
 
 import com.example.breezy.fragments.ChatFragment;
+import com.example.breezy.fragments.FeedbackFragment;
 import com.example.breezy.fragments.HomeFragment;
 import com.example.breezy.fragments.ProfileFragment;
+import com.example.breezy.fragments.TaskFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -48,6 +50,15 @@ public class MainActivity extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_frame, new HomeFragment()).commit();
                     setItemCheckable(true);
                     return true;
+                case R.id.nav_feedback:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_frame, new FeedbackFragment()).commit();
+                    setItemCheckable(true);
+                    return true;
+                case R.id.nav_tasks:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_frame, new TaskFragment()).commit();
+                    setItemCheckable(true);
+                    return true;
+
             }
             return false;
         });

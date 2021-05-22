@@ -51,50 +51,167 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="70dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
             <androidx.cardview.widget.CardView
                 android:layout_width="65dp"
                 android:layout_marginTop="5dp"
                 android:layout_height="65dp"
-                app:cardBackgroundColor="#CED2F4"
+                app:cardBackgroundColor="#00B4D8"
                 app:cardCornerRadius="10dp"
                 android:layout_marginLeft="20dp">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/happy"
+                   android:layout_marginTop="15dp"
+                    android:layout_marginLeft="13dp"/>
+
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
                 android:layout_width="65dp"
                 android:layout_marginTop="5dp"
                 android:layout_height="65dp"
-                app:cardBackgroundColor="#D1DAF3"
+                app:cardBackgroundColor="#0096C7"
                 app:cardCornerRadius="10dp"
                 android:layout_marginLeft="10dp">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/calm"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="13dp"/>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
                 android:layout_width="65dp"
                 android:layout_marginTop="5dp"
                 android:layout_height="65dp"
-                app:cardBackgroundColor="#CED2F4"
+                app:cardBackgroundColor="#0077B6"
                 app:cardCornerRadius="10dp"
                 android:layout_marginLeft="10dp">
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:src="@drawable/worried"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"/>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
                 android:layout_width="65dp"
                 android:layout_marginTop="5dp"
                 android:layout_height="65dp"
-                app:cardBackgroundColor="#CED2F4"
+                app:cardBackgroundColor="#023E8A"
                 app:cardCornerRadius="10dp"
                 android:layout_marginLeft="10dp">
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:src="@drawable/irritated"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"/>
             </androidx.cardview.widget.CardView>
                 <androidx.cardview.widget.CardView
                     android:layout_width="65dp"
                     android:layout_marginTop="5dp"
                     android:layout_height="65dp"
-                    app:cardBackgroundColor="#CED2F4"
+                    app:cardBackgroundColor="#03045E"
                     app:cardCornerRadius="10dp"
                     android:layout_marginLeft="10dp">
+                    <ImageView
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:src="@drawable/angry"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"/>
                 </androidx.cardview.widget.CardView>
 
         </LinearLayout>
 
     </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sleep"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#3E4242"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="90dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/button_home"
+            android:layout_marginStart="55dp"
+            android:text="+"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textSize="15sp"/>
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:id="@+id/sleep_no"
+            android:background="@drawable/text"/>
+        <Button
+            android:layout_width="90dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button_home"
+            android:layout_marginEnd="55dp"
+            android:layout_marginStart="10dp"
+            android:text="-"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textSize="15sp"/>
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Weight"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#3E4242"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="90dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/button_home"
+            android:layout_marginStart="55dp"
+            android:text="+"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textSize="15sp"/>
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:id="@+id/weight"
+            android:background="@drawable/text"/>
+        <Button
+            android:layout_width="90dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button_home"
+            android:layout_marginEnd="55dp"
+            android:layout_marginStart="10dp"
+            android:text="-"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textSize="15sp"/>
+    </LinearLayout>
 </LinearLayout>
+
 </FrameLayout>
