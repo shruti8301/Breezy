@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.breezy.R;
@@ -20,6 +21,11 @@ import static android.content.Context.MODE_PRIVATE;
 public class HomeFragment extends Fragment {
 
     @BindView(R.id.username) TextView username;
+    @BindView(R.id.sleep_no) TextView sleep_no;
+    @BindView(R.id.sleep_decrease) Button sleep_decrease;
+    @BindView(R.id.sleep_increase) Button sleep_increase;
+
+    int sleep_hours;
 
     public HomeFragment() {
     }
@@ -32,6 +38,20 @@ public class HomeFragment extends Fragment {
 
         SharedPreferences userPrefs = getContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
         username.setText(userPrefs.getString("Name", "Name"));
+
+        sleep_hours = 0;
+        sleep_decrease.setEnabled(false);
+
+        sleep_increase.setOnClickListener(view -> {
+            sleep_decrease.setEnabled(true);
+            sleep_no.setText(String.valueOf(++sleep_hours));
+        });
+
+        sleep_decrease.setOnClickListener(view -> {
+            sleep_no.setText(String.valueOf(--sleep_hours));
+            if (sleep_hours == 0)
+                sleep_decrease.setEnabled(false);
+        });
 
         return root;
     }
