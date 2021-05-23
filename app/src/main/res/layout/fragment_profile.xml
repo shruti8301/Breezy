@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,26 +10,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bg"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/username_profile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="85dp"
-                android:layout_marginTop="80dp"
-                android:layout_marginBottom="30dp"
-                android:text="Shruti Gupta"
-                android:textColor="#ffffff"
-                android:textSize="40sp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
+        <TextView
+            android:id="@+id/username_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="50dp"
+            android:text="Shruti Gupta"
+            android:textColor="#ffffff"
+            android:textSize="40sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,90 +34,99 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginEnd="20dp"
-                android:textSize="25sp"
                 android:text="Age"
-                />
+                android:textSize="25sp" />
+
             <TextView
                 android:id="@+id/profile_age"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="6dp"
                 android:layout_marginEnd="20dp"
-                android:textSize="27sp"
                 android:textColor="@color/black"
-                android:textStyle="bold"
+                android:textSize="27sp"
+                android:textStyle="bold" />
 
-                />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginEnd="20dp"
-                android:textSize="25sp"
                 android:text="Contact"
-                />
+                android:textSize="25sp" />
+
             <TextView
                 android:id="@+id/profile_contact"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="6dp"
                 android:layout_marginEnd="20dp"
-                android:textSize="27sp"
                 android:textColor="@color/black"
-                android:textStyle="bold"
+                android:textSize="27sp"
+                android:textStyle="bold" />
 
-                />
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="30dp"
-                app:cardCornerRadius="30dp"
-                app:cardBackgroundColor="#F1F3F4"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginEnd="30dp"
-                android:layout_marginBottom="50dp">
-                <ImageView
-                    android:layout_width="90dp"
-                    android:layout_height="110dp"
-                    android:layout_marginStart="130dp"
-                    android:layout_marginTop="20dp"
-                    android:src="@drawable/credit"/>
-                <LinearLayout
+                app:cardBackgroundColor="#F1F3F4"
+                app:cardCornerRadius="30dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="110dp"
-                    android:orientation="horizontal"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginEnd="30dp">
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="90dp"
+                        android:layout_height="110dp"
+                        android:layout_marginTop="20dp"
+                        android:src="@drawable/credit"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
                     <TextView
+                        android:id="@+id/textView3"
                         android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="70dp"
-                        android:layout_marginTop="30dp"
-                        android:layout_marginEnd="10dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
                         android:text="Points"
+                        android:layout_marginEnd="35dp"
                         android:textColor="@color/black"
                         android:textSize="27sp"
-                        />
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
                     <TextView
                         android:id="@+id/profile_credit"
                         android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="40dp"
-                        android:layout_marginTop="30dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:layout_marginStart="8dp"
+                        android:text="50"
                         android:textColor="@color/black"
                         android:textSize="27sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-        </LinearLayout>
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/textView3"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
     </LinearLayout>
-</FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
