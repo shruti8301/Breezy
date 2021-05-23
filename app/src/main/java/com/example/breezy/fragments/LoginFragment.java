@@ -23,6 +23,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.example.breezy.LoginActivity.login_progress;
+
 public class LoginFragment extends Fragment {
 
     @BindView(R.id.login_email) EditText login_email;
@@ -58,6 +60,7 @@ public class LoginFragment extends Fragment {
             if (email.isEmpty() || pass.isEmpty())
                 Snackbar.make(view, "Please fill all fields!", Snackbar.LENGTH_LONG).show();
             else {
+                login_progress.setVisibility(View.VISIBLE);
                 mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(task -> {
                     if (task.isSuccessful()){
                         startActivity(new Intent(getContext(), MainActivity.class));
@@ -65,6 +68,7 @@ public class LoginFragment extends Fragment {
                     }else{
                         Log.e("signInWith:failure",task.getException().getMessage());
                         Snackbar.make(view, "Authentication failed.", Snackbar.LENGTH_LONG).show();
+                        login_progress.setVisibility(View.GONE);
                     }
                 });
             }

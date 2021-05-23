@@ -1,5 +1,6 @@
 package com.example.breezy.fragments;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -8,9 +9,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.breezy.LoginActivity;
+import com.example.breezy.MainActivity;
 import com.example.breezy.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,6 +28,7 @@ public class ProfileFragment extends Fragment {
     @BindView(R.id.profile_age) TextView profile_age;
     @BindView(R.id.profile_contact) TextView profile_contact;
     @BindView(R.id.profile_credit) TextView profile_credit;
+    @BindView(R.id.signout_btn) Button signout_btn;
 
     public ProfileFragment() {
     }
@@ -39,6 +45,12 @@ public class ProfileFragment extends Fragment {
         profile_age.setText(userPrefs.getString("Age", "100"));
         profile_contact.setText(userPrefs.getString("Contact", "9876543210"));
         profile_credit.setText(userPrefs.getString("Points", "0"));
+
+        signout_btn.setOnClickListener(view -> {
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(getActivity(), LoginActivity.class));
+            getActivity().finish();
+        });
 
         return root;
     }

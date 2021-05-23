@@ -52,5 +52,5 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:20.0.0'
 
     //Graphs
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+//    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }
