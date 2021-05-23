@@ -2,13 +2,12 @@ package com.example.breezy;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 import android.widget.FrameLayout;
 
 import com.example.breezy.fragments.ChatFragment;
-import com.example.breezy.fragments.FeedbackFragment;
+import com.example.breezy.fragments.QuizFragment;
 import com.example.breezy.fragments.HomeFragment;
 import com.example.breezy.fragments.ProfileFragment;
 import com.example.breezy.fragments.TaskFragment;
@@ -51,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                     setItemCheckable(true);
                     return true;
                 case R.id.nav_feedback:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_frame, new FeedbackFragment()).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_frame, new QuizFragment()).commit();
                     setItemCheckable(true);
                     return true;
                 case R.id.nav_tasks:

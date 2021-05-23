@@ -11,13 +11,13 @@ import com.example.breezy.R;
 
 import butterknife.ButterKnife;
 
-public class FeedbackFragment extends Fragment {
-    public FeedbackFragment() {
+public class QuizFragment extends Fragment {
+    public QuizFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_feedback, container, false);
+        View root = inflater.inflate(R.layout.fragment_quiz, container, false);
 
         ButterKnife.bind(this, root);
 
