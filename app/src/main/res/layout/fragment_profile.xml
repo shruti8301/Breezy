@@ -75,7 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="30dp"
                 app:cardBackgroundColor="#F1F3F4"
                 app:cardCornerRadius="30dp">
@@ -132,7 +132,7 @@
                 android:layout_height="wrap_content"
                 android:text="Logout"
                 android:layout_gravity="end"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/button_home"
                 android:textColor="@color/white"
