@@ -1,6 +1,5 @@
 package com.example.breezy.models;
 
-
 public class Message {
 
     private String message;

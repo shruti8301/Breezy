@@ -8,10 +8,15 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import com.example.breezy.R;
+import com.google.android.exoplayer2.ui.PlayerView;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class TaskFragment extends Fragment {
+
+    @BindView(R.id.media_player) PlayerView media_player;
+
     public TaskFragment() {
     }
 

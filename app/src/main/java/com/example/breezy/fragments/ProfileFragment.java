@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.breezy.LoginActivity;
-import com.example.breezy.MainActivity;
 import com.example.breezy.R;
 import com.google.firebase.auth.FirebaseAuth;
 

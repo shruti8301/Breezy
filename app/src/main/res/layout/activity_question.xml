@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".QuestionActivity"
-    android:background="@color/primary">
+    android:background="@color/primary"
+    tools:context=".QuestionActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="60dp"
         android:layout_marginRight="32dp"
@@ -20,71 +20,83 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
+            android:layout_height="wrap_content">
 
             <ProgressBar
+                android:id="@+id/progressBar"
                 style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                android:layout_width="86dp"
-                android:layout_height="30dp"
-                tools:layout_editor_absoluteX="237dp"
-                tools:layout_editor_absoluteY="30dp" />
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
             <TextView
                 android:id="@+id/textView"
-                android:layout_width="311dp"
-                android:layout_height="79dp"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:text="TextView"
-                tools:layout_editor_absoluteX="16dp"
-                tools:layout_editor_absoluteY="99dp" />
+                android:textColor="@color/primaryVariant"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/progressBar" />
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="TextView"
-                tools:layout_editor_absoluteX="252dp"
-                tools:layout_editor_absoluteY="15dp" />
+                app:layout_constraintStart_toStartOf="@+id/progressBar"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <RadioGroup
-                android:layout_width="315dp"
-                android:layout_height="285dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
                 android:orientation="vertical"
-                tools:layout_editor_absoluteX="16dp"
-                tools:layout_editor_absoluteY="194dp">
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView">
 
                 <RadioButton
                     android:id="@+id/radioButton"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:text="RadioButton"
-                   />
+                    android:layout_height="50dp"
+                    android:text="RadioButton" />
 
                 <RadioButton
                     android:id="@+id/radioButton2"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:text="RadioButton"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:text="RadioButton" />
 
                 <RadioButton
                     android:id="@+id/radioButton3"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:text="RadioButton"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:text="RadioButton" />
 
                 <RadioButton
                     android:id="@+id/radioButton4"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:text="RadioButton"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:text="RadioButton" />
             </RadioGroup>
-
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -94,14 +106,16 @@
         android:id="@+id/next"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_marginTop="24dp"
         android:layout_marginStart="30dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="30dp"
         android:background="@drawable/round_btn_ques"
+        android:gravity="center"
         android:text="Next"
         android:textAllCaps="false"
         android:textColor="#181C33"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
@@ -111,7 +125,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:layout_marginBottom="47dp"
+        android:layout_marginBottom="36dp"
         android:text="Previous"
         android:textColor="#ffffff"
         android:textSize="20sp"

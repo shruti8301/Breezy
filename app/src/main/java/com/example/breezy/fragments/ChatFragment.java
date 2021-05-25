@@ -35,20 +35,22 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ChatFragment extends Fragment implements BotReply {
-    RecyclerView chatView;
-    ChatAdapter chatAdapter;
+
+    @BindView(R.id.chatView) RecyclerView chatView;
+    @BindView(R.id.editMessage) EditText editMessage;
+    @BindView(R.id.btnSend) ImageButton btnSend;
+
+    private ChatAdapter chatAdapter;
     List<Message> messageList = new ArrayList<>();
-    EditText editMessage;
-    ImageButton btnSend;
 
     private SessionsClient sessionsClient;
     private SessionName sessionName;
     private String uuid = UUID.randomUUID().toString();
-public static  String TAG = "chatfragment";
-
+    public static String TAG = "ChatFragment";
 
     public ChatFragment() {
     }
@@ -56,32 +58,28 @@ public static  String TAG = "chatfragment";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_chat, container, false);
+
         ButterKnife.bind(this, root);
-        chatView = root.findViewById(R.id.chatView);
-        editMessage = root.findViewById(R.id.editMessage);
-        btnSend = root.findViewById(R.id.btnSend);
 
         chatAdapter = new ChatAdapter(messageList, getActivity());
         chatView.setAdapter(chatAdapter);
 
-
-
-        btnSend.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View view) {
-                String message = editMessage.getText().toString();
-                if (!message.isEmpty()) {
-                    messageList.add(new Message(message, false));
-                    editMessage.setText("");
-                    sendMessageToBot(message);
-                    Objects.requireNonNull(chatView.getAdapter()).notifyDataSetChanged();
-                    Objects.requireNonNull(chatView.getLayoutManager())
-                            .scrollToPosition(messageList.size() - 1);
-                } else {
-                    Toast.makeText(getContext(), "Please enter text!", Toast.LENGTH_SHORT).show();
-                }
+        btnSend.setOnClickListener(view -> {
+            String message = editMessage.getText().toString();
+            if (!message.isEmpty()) {
+                messageList.add(new Message(message, false));
+                editMessage.setText("");
+                sendMessageToBot(message);
+                Objects.requireNonNull(chatView.getAdapter()).notifyDataSetChanged();
+                Objects.requireNonNull(chatView.getLayoutManager())
+                        .scrollToPosition(messageList.size() - 1);
+            } else {
+                Toast.makeText(getContext(), "Please enter text!", Toast.LENGTH_SHORT).show();
             }
         });
+
         setUpBot();
+
         return root;
     }
 
@@ -112,13 +110,13 @@ public static  String TAG = "chatfragment";
 
     @Override
     public void callback(DetectIntentResponse returnResponse) {
-        if(returnResponse!=null) {
+        if (returnResponse != null) {
             String botReply = returnResponse.getQueryResult().getFulfillmentText();
-            if(!botReply.isEmpty()){
+            if (!botReply.isEmpty()) {
                 messageList.add(new Message(botReply, true));
                 chatAdapter.notifyDataSetChanged();
                 Objects.requireNonNull(chatView.getLayoutManager()).scrollToPosition(messageList.size() - 1);
-            }else {
+            } else {
                 Toast.makeText(getContext(), "something went wrong", Toast.LENGTH_SHORT).show();
             }
         } else {

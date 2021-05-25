@@ -12,6 +12,7 @@ import com.example.breezy.R;
 import butterknife.ButterKnife;
 
 public class QuizFragment extends Fragment {
+
     public QuizFragment() {
     }
 

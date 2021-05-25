@@ -3,10 +3,12 @@ package com.example.breezy;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -23,13 +25,17 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.bottomNavigation) BottomNavigationView bottomNavigation;
-    @BindView(R.id.profileFloatingBtn) FloatingActionButton profileFloatingBtn;
+    @BindView(R.id.taskFloatingBtn) FloatingActionButton taskFloatingBtn;
+    @BindView(R.id.coordinatorLayout) CoordinatorLayout coordinatorLayout;
     @BindView(R.id.nav_host_frame) FrameLayout nav_host_frame;
 
     @Override
@@ -40,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         ButterKnife.bind(this);
 
-        profileFloatingBtn.setOnClickListener(view -> {
-            getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_frame, new ProfileFragment()).commit();
+        taskFloatingBtn.setOnClickListener(view -> {
+            getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_frame, new TaskFragment()).commit();
             setItemCheckable(false);
         });
 
@@ -50,33 +56,43 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNavigation.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
-                case R.id.nav_chat:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_frame, new ChatFragment()).commit();
-                    setItemCheckable(true);
-                    return true;
-
                 case R.id.nav_home:
                     getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_frame, new HomeFragment()).commit();
                     setItemCheckable(true);
                     return true;
 
-                case R.id.nav_feedback:
+                case R.id.nav_quiz:
                     getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_frame, new QuizFragment()).commit();
                     setItemCheckable(true);
                     return true;
 
-                case R.id.nav_tasks:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_frame, new TaskFragment()).commit();
+                case R.id.nav_chat:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_frame, new ChatFragment()).commit();
+                    setItemCheckable(true);
+                    return true;
+
+                case R.id.nav_profile:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_frame, new ProfileFragment()).commit();
                     setItemCheckable(true);
                     return true;
             }
             return false;
         });
+
+        KeyboardVisibilityEvent.setEventListener(this, isOpen -> {
+            if(isOpen){
+                coordinatorLayout.setVisibility(View.INVISIBLE);
+            }else{
+                coordinatorLayout.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     private void setItemCheckable(boolean b) {
         bottomNavigation.getMenu().getItem(0).setCheckable(b);
-        bottomNavigation.getMenu().getItem(2).setCheckable(b);
+        bottomNavigation.getMenu().getItem(1).setCheckable(b);
+        bottomNavigation.getMenu().getItem(3).setCheckable(b);
+        bottomNavigation.getMenu().getItem(4).setCheckable(b);
     }
 
     @Override

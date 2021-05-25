@@ -3,22 +3,22 @@
 
     <item
         android:id="@+id/nav_home"
-        android:title="Home"
-        android:icon="@drawable/home"/>
+        android:icon="@drawable/nav_home"
+        android:title="Home" />
     <item
-        android:id="@+id/nav_tasks"
-        android:title="Tasks"
-        android:icon="@drawable/task"/>
+        android:id="@+id/nav_quiz"
+        android:icon="@drawable/nav_quiz"
+        android:title="Questionnaire" />
     <item
         android:checkable="false"
         android:enabled="false"
         android:title="" />
     <item
-        android:id="@+id/nav_feedback"
-        android:title="Feedback"
-        android:icon="@drawable/feedback"/>
-    <item
         android:id="@+id/nav_chat"
-        android:title="Chat"
-        android:icon="@drawable/chat"/>
+        android:icon="@drawable/nav_chat"
+        android:title="Chat" />
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/nav_profile"
+        android:title="Profile" />
 </menu>
