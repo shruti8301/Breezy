@@ -72,6 +72,10 @@ public class HomeFragment extends Fragment {//implements OnChartGestureListener,
         graphView.getAxisRight().setDrawGridLines(false);
         graphView.getAxisLeft().setDrawGridLines(false);
         graphView.getXAxis().setDrawGridLines(false);
+        graphView.getAxisLeft().setDrawLabels(false);
+        graphView.getAxisRight().setDrawLabels(false);
+        graphView.getXAxis().setDrawLabels(false);
+
 
         List<Entry> yValues = new ArrayList<>();
         yValues.add(new Entry(0, 60f));
@@ -88,12 +92,12 @@ public class HomeFragment extends Fragment {//implements OnChartGestureListener,
         Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.fade_graph);
         set.setDrawFilled(true);
         set.setFillDrawable(drawable);
-        set.setColor(Color.BLACK);
+        set.setColor(Color.rgb(0,119,182));
         set.setLineWidth(1.5f);
-        set.enableDashedLine(4f, 2.5f, 0f);
-        set.setCircleColor(Color.BLACK);
-        set.setCircleHoleColor(Color.WHITE);
-
+       // set.enableDashedLine(4f, 2.5f, 0f);
+        //set.setCircleColor(Color.rgb(81,189,212));
+       // set.setCircleHoleColor(Color.WHITE);
+        set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
         List<ILineDataSet> dataSets = new ArrayList<>();
         dataSets.add(set);
 

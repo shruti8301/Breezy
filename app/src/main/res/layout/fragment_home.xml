@@ -21,7 +21,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:text="Welcome"
                 android:textColor="#2a2a2a"
                 android:textSize="30sp"
@@ -32,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:text="Name"
                 android:textColor="#2a2a2a"
                 android:textSize="30sp"
@@ -41,6 +41,7 @@
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/graphView"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="250dp"/>
 
@@ -54,6 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
                 android:text="How are you feeling today?"
                 android:textColor="#3E4242"
                 android:textSize="20sp"
