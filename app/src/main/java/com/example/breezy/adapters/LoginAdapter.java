@@ -1,4 +1,4 @@
-package com.example.breezy;
+package com.example.breezy.adapters;
 
 import android.content.Context;
 
@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.example.breezy.fragments.LoginFragment;
 import com.example.breezy.fragments.SignupFragment;
 
-class LoginAdapter extends FragmentPagerAdapter {
+public class LoginAdapter extends FragmentPagerAdapter {
 
     Context context;
     int totalTabs;

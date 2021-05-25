@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.breezy.LoginActivity;
 import com.example.breezy.R;
+import com.example.breezy.database.MessageDb;
 import com.google.firebase.auth.FirebaseAuth;
 
 import butterknife.BindView;
@@ -47,6 +48,7 @@ public class ProfileFragment extends Fragment {
 
         signout_btn.setOnClickListener(view -> {
             FirebaseAuth.getInstance().signOut();
+            MessageDb.getInstance(getContext()).messageDao().deleteAllMessages();
             startActivity(new Intent(getActivity(), LoginActivity.class));
             getActivity().finish();
         });

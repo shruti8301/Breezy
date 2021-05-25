@@ -16,4 +16,7 @@ public interface MessageDao {
 
     @Query("SELECT * FROM messageDb")
     List<Message> loadAllMessages();
+
+    @Query("DELETE FROM messageDb")
+    void deleteAllMessages();
 }

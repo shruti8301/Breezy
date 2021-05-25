@@ -67,9 +67,6 @@ public class HomeFragment extends Fragment {//implements OnChartGestureListener,
                 sleep_decrease.setEnabled(false);
         });
 
-//        graphView.setOnChartGestureListener(this);
-//        graphView.setOnChartValueSelectedListener(this);
-
         graphView.setDragEnabled(true);
         graphView.setScaleEnabled(true);
         graphView.getAxisRight().setDrawGridLines(false);
@@ -85,10 +82,10 @@ public class HomeFragment extends Fragment {//implements OnChartGestureListener,
         yValues.add(new Entry(5, 60f));
         yValues.add(new Entry(6, 65f));
 
-        LineDataSet set = new LineDataSet(yValues, "Data Set");
+        LineDataSet set = new LineDataSet(yValues, "Mood Graph");
         set.setFillAlpha(110);
 
-        Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.fade_red);
+        Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.fade_graph);
         set.setDrawFilled(true);
         set.setFillDrawable(drawable);
         set.setColor(Color.BLACK);
