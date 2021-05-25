@@ -15,6 +15,8 @@ import com.example.breezy.models.Message;
 
 import java.util.List;
 
+import static android.view.View.GONE;
+
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> {
 
     private List<Message> messageList;
@@ -39,11 +41,11 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
 
         if (isReceived) {
             holder.messageReceive.setVisibility(View.VISIBLE);
-            holder.messageSend.setVisibility(View.GONE);
+            holder.messageSend.setVisibility(GONE);
             holder.messageReceive.setText(message);
         } else {
             holder.messageSend.setVisibility(View.VISIBLE);
-            holder.messageReceive.setVisibility(View.GONE);
+            holder.messageReceive.setVisibility(GONE);
             holder.messageSend.setText(message);
         }
     }
@@ -55,8 +57,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView messageSend;
-        TextView messageReceive;
+        TextView messageSend, messageReceive;
 
         MyViewHolder(@NonNull View itemView) {
             super(itemView);

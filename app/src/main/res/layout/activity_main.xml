@@ -29,7 +29,7 @@
             android:id="@+id/bottomAppBar"
             style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
             android:layout_gravity="bottom"
             app:backgroundTint="@color/white"
             app:elevation="16dp"
