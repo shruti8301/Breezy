@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.example.breezy.R;
 import com.example.breezy.adapters.ChatAdapter;
+import com.example.breezy.database.MessageDao;
+import com.example.breezy.database.MessageDb;
 import com.example.breezy.helper.SendMessageInBg;
 import com.example.breezy.interfaces.BotReply;
 import com.example.breezy.models.Message;
@@ -30,7 +32,6 @@ import com.google.cloud.dialogflow.v2.TextInput;
 import com.google.common.collect.Lists;
 
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -45,7 +46,8 @@ public class ChatFragment extends Fragment implements BotReply {
     @BindView(R.id.btnSend) ImageButton btnSend;
 
     private ChatAdapter chatAdapter;
-    List<Message> messageList = new ArrayList<>();
+    private MessageDao messageDao;
+    List<Message> messageList;
 
     private SessionsClient sessionsClient;
     private SessionName sessionName;
@@ -60,6 +62,9 @@ public class ChatFragment extends Fragment implements BotReply {
         View root = inflater.inflate(R.layout.fragment_chat, container, false);
 
         ButterKnife.bind(this, root);
+        messageDao = MessageDb.getInstance(getContext()).messageDao();
+
+        messageList = messageDao.loadAllMessages();
 
         chatAdapter = new ChatAdapter(messageList, getActivity());
         chatView.setAdapter(chatAdapter);
@@ -67,7 +72,9 @@ public class ChatFragment extends Fragment implements BotReply {
         btnSend.setOnClickListener(view -> {
             String message = editMessage.getText().toString();
             if (!message.isEmpty()) {
-                messageList.add(new Message(message, false));
+                Message msg = new Message(message, false);
+                messageList.add(msg);
+                messageDao.insertItem(msg);
                 editMessage.setText("");
                 sendMessageToBot(message);
                 Objects.requireNonNull(chatView.getAdapter()).notifyDataSetChanged();
@@ -113,7 +120,9 @@ public class ChatFragment extends Fragment implements BotReply {
         if (returnResponse != null) {
             String botReply = returnResponse.getQueryResult().getFulfillmentText();
             if (!botReply.isEmpty()) {
-                messageList.add(new Message(botReply, true));
+                Message msg = new Message(botReply, true);
+                messageList.add(msg);
+                messageDao.insertItem(msg);
                 chatAdapter.notifyDataSetChanged();
                 Objects.requireNonNull(chatView.getLayoutManager()).scrollToPosition(messageList.size() - 1);
             } else {

@@ -74,4 +74,8 @@ dependencies {
     implementation 'com.google.android.exoplayer:exoplayer-core:2.14.0'
     implementation 'com.google.android.exoplayer:exoplayer-dash:2.14.0'
     implementation 'com.google.android.exoplayer:exoplayer-ui:2.14.0'
+
+    //Room SQL
+    implementation "android.arch.persistence.room:runtime:1.1.1"
+    annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
 }
