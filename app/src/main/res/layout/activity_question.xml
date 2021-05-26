@@ -25,17 +25,17 @@
             android:layout_height="wrap_content">
 
             <ProgressBar
-                android:id="@+id/progressBar"
+                android:id="@+id/question_progress"
                 style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                app:layout_constraintTop_toBottomOf="@+id/question_number" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/question_view"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_marginStart="16dp"
@@ -46,63 +46,71 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+                app:layout_constraintTop_toBottomOf="@+id/question_progress" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/question_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="TextView"
-                app:layout_constraintStart_toStartOf="@+id/progressBar"
+                android:text="Question 0/0"
+                android:textColor="@color/primaryVariant"
+                app:layout_constraintStart_toStartOf="@+id/question_progress"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <RadioGroup
+                android:id="@+id/options_group"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="32dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView">
+                app:layout_constraintTop_toBottomOf="@+id/question_view">
 
                 <RadioButton
                     android:id="@+id/radioButton"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
-                    android:text="RadioButton" />
+                    android:checked="true"
+                    android:tag="yes"
+                    android:text="Yes" />
 
                 <RadioButton
                     android:id="@+id/radioButton2"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="10dp"
-                    android:text="RadioButton" />
+                    android:tag="no"
+                    android:text="No" />
 
                 <RadioButton
                     android:id="@+id/radioButton3"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="10dp"
-                    android:text="RadioButton" />
+                    android:text="RadioButton"
+                    android:visibility="gone" />
 
                 <RadioButton
                     android:id="@+id/radioButton4"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="10dp"
-                    android:text="RadioButton" />
+                    android:text="RadioButton"
+                    android:visibility="gone" />
 
                 <RadioButton
                     android:id="@+id/radioButton5"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="10dp"
-                    android:text="RadioButton" />
+                    android:text="RadioButton"
+                    android:visibility="gone" />
             </RadioGroup>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -110,7 +118,7 @@
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/next"
+        android:id="@+id/next_ques_btn"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginStart="30dp"
@@ -123,12 +131,13 @@
         android:textColor="#181C33"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/previous_ques_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
     <TextView
-        android:id="@+id/previous"
+        android:id="@+id/previous_ques_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -139,6 +148,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/next" />
+        app:layout_constraintTop_toBottomOf="@+id/next_ques_btn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
