@@ -10,9 +10,9 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="350dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="100dp"
         android:layout_marginRight="32dp"
         app:cardCornerRadius="20dp"
         app:cardElevation="5dp"
@@ -22,14 +22,14 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <ProgressBar
                 android:id="@+id/question_progress"
                 style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="6dp"
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/question_number" />
@@ -39,7 +39,7 @@
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="25dp"
                 android:layout_marginEnd="16dp"
                 android:text="TextView"
                 android:textColor="@color/primaryVariant"
@@ -52,7 +52,7 @@
                 android:id="@+id/question_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="20dp"
                 android:text="Question 0/0"
                 android:textColor="@color/primaryVariant"
                 app:layout_constraintStart_toStartOf="@+id/question_progress"
@@ -63,11 +63,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="25dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="32dp"
                 android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/question_view">
@@ -77,6 +75,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:checked="true"
+                    android:buttonTint="@color/primary"
                     android:tag="yes"
                     android:text="Yes" />
 
@@ -84,7 +83,8 @@
                     android:id="@+id/radioButton2"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
+                    android:buttonTint="@color/primary"
                     android:tag="no"
                     android:text="No" />
 
@@ -120,10 +120,11 @@
     <Button
         android:id="@+id/next_ques"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="50dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="30dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/round_btn_ques"
         android:gravity="center"
         android:text="Next"
@@ -160,14 +161,12 @@
         android:id="@+id/previous_ques_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginTop="20dp"
         android:text="Previous"
         android:textColor="#ffffff"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/next_ques_btn" />
+        app:layout_constraintTop_toBottomOf="@+id/next_ques" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
