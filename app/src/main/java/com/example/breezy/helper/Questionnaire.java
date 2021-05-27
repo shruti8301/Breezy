@@ -11,7 +11,6 @@ public class Questionnaire {
     static String mainJsonStr = "{\n" +
             "\"Schizophrenia\":[\"Do you struggle to trust that what you are thinking is real?\",\n" +
             "\"Do you get the sense that others are controlling your thoughts and emotions?\",\n" +
-            "\"Do you struggle to keep up with daily living tasks such as showering, changing clothes, paying bills, cleaning, cooking, etc.?\",\n" +
             "\"Do other people say that it is difficult for you to stay on subject or for them to understand you?\",\n" +
             "\"Do you feel that you have little in common with family and friends?\",\n" +
             "\"Do you feel that you are being tracked, followed, or watched at home or outside?\"],\n" +

@@ -3,6 +3,7 @@ package com.example.breezy;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,7 +20,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,7 +30,6 @@ public class QuestionActivity extends AppCompatActivity {
 
     @BindView(R.id.question_view) TextView question_view;
     @BindView(R.id.question_number) TextView question_number;
-    @BindView(R.id.temp_type) TextView temp_type;
     @BindView(R.id.question_progress) ProgressBar question_progress;
     @BindView(R.id.options_group) RadioGroup options_group;
     @BindView(R.id.previous_ques_btn) TextView prev_btn;
@@ -103,7 +102,6 @@ public class QuestionActivity extends AppCompatActivity {
                             currentCode.add(check.getKey());
                         }
                     }
-                    temp_type.setText(currentCode.get(position));
 
                     question_number.setText("Question " + "6/" + (allQuestions.size() + 5));
                     question_progress.setMax(allQuestions.size() + 5);
@@ -124,17 +122,28 @@ public class QuestionActivity extends AppCompatActivity {
         next_ques_btn.setOnClickListener(view -> {
             if (findViewById(options_group.getCheckedRadioButtonId()).getTag().toString().equals("yes")) {
                 basicQuesPoints.put(currentCode.get(position), basicQuesPoints.get(currentCode.get(position)) + 1);
-                Log.e("Info", basicQuesPoints.toString());
             }
             if (position == allQuestions.size() - 1) {
-                startActivity(new Intent(QuestionActivity.this, SplashActivity.class));
+                int maxValue = 0;
+                String finalDisease = null;
+                for (Map.Entry<String, Integer> entry : basicQuesPoints.entrySet()){
+                    if (entry.getValue() > maxValue) {
+                        maxValue = entry.getValue();
+                        finalDisease = entry.getKey();
+                    }
+                }
+                Intent intent = new Intent(QuestionActivity.this, MainActivity.class);
+                SharedPreferences userPrefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+                SharedPreferences.Editor Ed = userPrefs.edit();
+                Ed.putString("Disease", finalDisease);
+                Ed.commit();
+                startActivity(intent);
                 finish();
                 return;
             }
             question_view.setText(allQuestions.get(++position));
             question_number.setText("Question " + (position + 6) + "/" + (allQuestions.size() + 5));
             question_progress.setProgress(position + 6);
-            temp_type.setText(currentCode.get(position));
         });
     }
 }

@@ -20,8 +20,6 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.listener.OnChartGestureListener;
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,10 +29,11 @@ import butterknife.ButterKnife;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class HomeFragment extends Fragment {//implements OnChartGestureListener, OnChartValueSelectedListener {
+public class HomeFragment extends Fragment {
 
     @BindView(R.id.username) TextView username;
     @BindView(R.id.sleep_no) TextView sleep_no;
+    @BindView(R.id.detect_disease) TextView detect_disease;
     @BindView(R.id.sleep_decrease) Button sleep_decrease;
     @BindView(R.id.sleep_increase) Button sleep_increase;
     @BindView(R.id.graphView) LineChart graphView;
@@ -52,6 +51,7 @@ public class HomeFragment extends Fragment {//implements OnChartGestureListener,
 
         SharedPreferences userPrefs = getContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
         username.setText(userPrefs.getString("Name", "Name"));
+        detect_disease.setText(userPrefs.getString("Disease", "None"));
 
         sleep_hours = 0;
         sleep_decrease.setEnabled(false);
@@ -76,7 +76,6 @@ public class HomeFragment extends Fragment {//implements OnChartGestureListener,
         graphView.getAxisRight().setDrawLabels(false);
         graphView.getXAxis().setDrawLabels(false);
 
-
         List<Entry> yValues = new ArrayList<>();
         yValues.add(new Entry(0, 60f));
         yValues.add(new Entry(1, 50f));
@@ -94,10 +93,8 @@ public class HomeFragment extends Fragment {//implements OnChartGestureListener,
         set.setFillDrawable(drawable);
         set.setColor(Color.rgb(0,119,182));
         set.setLineWidth(1.5f);
-       // set.enableDashedLine(4f, 2.5f, 0f);
-        //set.setCircleColor(Color.rgb(81,189,212));
-       // set.setCircleHoleColor(Color.WHITE);
         set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+
         List<ILineDataSet> dataSets = new ArrayList<>();
         dataSets.add(set);
 
