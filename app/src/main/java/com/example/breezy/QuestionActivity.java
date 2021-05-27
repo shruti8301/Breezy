@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RadioGroup;
@@ -14,30 +15,34 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.example.breezy.helper.Questionnaire.getQuestions;
+
 public class QuestionActivity extends AppCompatActivity {
 
-    @BindView(R.id.question_view)
-    TextView question_view;
-    @BindView(R.id.question_number)
-    TextView question_number;
-    @BindView(R.id.question_progress)
-    ProgressBar question_progress;
-    @BindView(R.id.options_group)
-    RadioGroup options_group;
-    @BindView(R.id.previous_ques_btn)
-    TextView prev_btn;
-    @BindView(R.id.next_ques_btn)
-    Button next_btn;
+    @BindView(R.id.question_view) TextView question_view;
+    @BindView(R.id.question_number) TextView question_number;
+    @BindView(R.id.temp_type) TextView temp_type;
+    @BindView(R.id.question_progress) ProgressBar question_progress;
+    @BindView(R.id.options_group) RadioGroup options_group;
+    @BindView(R.id.previous_ques_btn) TextView prev_btn;
+    @BindView(R.id.next_ques) Button next_btn;
+    @BindView(R.id.next_ques_btn) Button next_ques_btn;
 
     private int position;
+    private List<String> currentCode;
     private JSONArray basicQuestions = null;
     private JSONObject currentQuestion;
+    private List<String> allQuestions, temp;
+    private Map<String, Integer> numberOfQues;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,8 @@ public class QuestionActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+        numberOfQues = new HashMap<>();
+        currentCode = new ArrayList<>();
         Map<String, Integer> basicQuesPoints = new HashMap<>();
         basicQuesPoints.put("Schizophrenia", 0);
         basicQuesPoints.put("PTSD", 0);
@@ -74,12 +81,34 @@ public class QuestionActivity extends AppCompatActivity {
         next_btn.setOnClickListener(view -> {
             try {
                 String code = currentQuestion.get("code").toString();
-                if (findViewById(options_group.getCheckedRadioButtonId()).getTag().toString().equals("yes"))
+                if (findViewById(options_group.getCheckedRadioButtonId()).getTag().toString().equals("yes")) {
                     basicQuesPoints.put(code, basicQuesPoints.get(code) + 1);
+                    numberOfQues.put(code, (Integer) currentQuestion.get("id"));
+                }
 
                 if (position == 4) {
-                    startActivity(new Intent(QuestionActivity.this, SplashActivity.class));
-                    finish();
+                    next_btn.setVisibility(View.GONE);
+                    next_ques_btn.setVisibility(View.VISIBLE);
+                    temp = new ArrayList<>();
+                    for (Map.Entry<String, Integer> check : basicQuesPoints.entrySet()) {
+                        if (check.getValue() == 1) {
+                            temp.add(check.getKey());
+                        }
+                    }
+                    allQuestions = getQuestions(temp);
+                    question_view.setText(allQuestions.get(0));
+                    position = 0;
+                    for (Map.Entry<String, Integer> check : numberOfQues.entrySet()) {
+                        for (int i = 0; i < check.getValue(); i++) {
+                            currentCode.add(check.getKey());
+                        }
+                    }
+                    temp_type.setText(currentCode.get(position));
+
+                    question_number.setText("Question " + "6/" + (allQuestions.size() + 5));
+                    question_progress.setMax(allQuestions.size() + 5);
+                    question_progress.setProgress(6);
+                    return;
                 }
                 currentQuestion = new JSONObject(basicQuestions.get(++position).toString());
                 question_view.setText(currentQuestion.get("ques").toString());
@@ -90,6 +119,22 @@ public class QuestionActivity extends AppCompatActivity {
             question_progress.setProgress(position + 1);
 
             Log.e("Info", basicQuesPoints.toString());
+        });
+
+        next_ques_btn.setOnClickListener(view -> {
+            if (findViewById(options_group.getCheckedRadioButtonId()).getTag().toString().equals("yes")) {
+                basicQuesPoints.put(currentCode.get(position), basicQuesPoints.get(currentCode.get(position)) + 1);
+                Log.e("Info", basicQuesPoints.toString());
+            }
+            if (position == allQuestions.size() - 1) {
+                startActivity(new Intent(QuestionActivity.this, SplashActivity.class));
+                finish();
+                return;
+            }
+            question_view.setText(allQuestions.get(++position));
+            question_number.setText("Question " + (position + 6) + "/" + (allQuestions.size() + 5));
+            question_progress.setProgress(position + 6);
+            temp_type.setText(currentCode.get(position));
         });
     }
 }
