@@ -32,7 +32,6 @@ public class QuestionActivity extends AppCompatActivity {
     @BindView(R.id.question_number) TextView question_number;
     @BindView(R.id.question_progress) ProgressBar question_progress;
     @BindView(R.id.options_group) RadioGroup options_group;
-    @BindView(R.id.previous_ques_btn) TextView prev_btn;
     @BindView(R.id.next_ques) Button next_btn;
     @BindView(R.id.next_ques_btn) Button next_ques_btn;
 
@@ -95,6 +94,17 @@ public class QuestionActivity extends AppCompatActivity {
                         }
                     }
                     allQuestions = getQuestions(temp);
+
+                    if (allQuestions.size() == 0) {
+                        SharedPreferences userPrefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+                        SharedPreferences.Editor Ed = userPrefs.edit();
+                        Ed.putString("Disease", "You are super healthy");
+                        Ed.commit();
+                        startActivity(new Intent(QuestionActivity.this, MainActivity.class));
+                        finish();
+                        return;
+                    }
+
                     question_view.setText(allQuestions.get(0));
                     position = 0;
                     for (Map.Entry<String, Integer> check : numberOfQues.entrySet()) {
@@ -126,18 +136,17 @@ public class QuestionActivity extends AppCompatActivity {
             if (position == allQuestions.size() - 1) {
                 int maxValue = 0;
                 String finalDisease = null;
-                for (Map.Entry<String, Integer> entry : basicQuesPoints.entrySet()){
+                for (Map.Entry<String, Integer> entry : basicQuesPoints.entrySet()) {
                     if (entry.getValue() > maxValue) {
                         maxValue = entry.getValue();
                         finalDisease = entry.getKey();
                     }
                 }
-                Intent intent = new Intent(QuestionActivity.this, MainActivity.class);
                 SharedPreferences userPrefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
                 SharedPreferences.Editor Ed = userPrefs.edit();
                 Ed.putString("Disease", finalDisease);
                 Ed.commit();
-                startActivity(intent);
+                startActivity(new Intent(QuestionActivity.this, MainActivity.class));
                 finish();
                 return;
             }
