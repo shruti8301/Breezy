@@ -22,4 +22,13 @@ public interface DailyDao {
 
     @Query("SELECT COUNT(*) FROM dailyPointDb WHERE date = :inputDate")
     int isDatePresent(String inputDate);
+
+    @Query("SELECT sleep FROM dailyPointDb ORDER BY id DESC LIMIT 1")
+    int getSleep();
+
+    @Query("SELECT mood FROM dailyPointDb ORDER BY id DESC LIMIT 1")
+    int getMoodPoints();
+
+    @Query("SELECT isHydrated FROM dailyPointDb ORDER BY id DESC LIMIT 1")
+    int getHydrated();
 }

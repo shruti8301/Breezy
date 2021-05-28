@@ -109,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
                     Ed.putString("Name", String.valueOf(snapshot.child("Name").getValue()));
                     Ed.putString("Age", String.valueOf(snapshot.child("Age").getValue()));
                     Ed.putString("Contact", String.valueOf(snapshot.child("Contact").getValue()));
+                    Ed.putString("Gender", String.valueOf(snapshot.child("Gender").getValue()));
                     Ed.putString("Points", String.valueOf(snapshot.child("Points").getValue()));
                     Ed.commit();
                 }

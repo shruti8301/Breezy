@@ -12,6 +12,7 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,8 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.google.android.material.snackbar.Snackbar;
 
+import org.json.JSONException;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -40,6 +43,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.example.breezy.helper.ValueTable.getPoints;
 
 public class HomeFragment extends Fragment {
 
@@ -66,6 +70,12 @@ public class HomeFragment extends Fragment {
         String date = formatter.format(new Date());
 
         dailyDao = DailyPointDb.getInstance(getContext()).dailyDao();
+        try {
+            int valuePoints = getPoints(getContext());
+            Log.e("Info", valuePoints + "");
+        } catch (JSONException | InterruptedException e) {
+            e.printStackTrace();
+        }
         if (dailyDao.isDatePresent(date) == 0)
             showDailyDialog(date);
 

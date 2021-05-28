@@ -1,6 +1,5 @@
 package com.example.breezy.models;
 
-import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
@@ -8,12 +7,12 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "dailyPointDb")
 public class DailyPoints {
 
-    @PrimaryKey
-    @NonNull
-    private String date;
+    @PrimaryKey(autoGenerate = true)
+    private long id;
 
     private int sleep, mood;
     private boolean isHydrated;
+    private String date;
 
     public DailyPoints() {
     }
@@ -56,5 +55,13 @@ public class DailyPoints {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }
