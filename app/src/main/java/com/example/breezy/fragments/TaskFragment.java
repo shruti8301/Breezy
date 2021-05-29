@@ -1,15 +1,25 @@
 package com.example.breezy.fragments;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
 import com.example.breezy.R;
+
+import com.example.breezy.database.DailyDao;
+import com.example.breezy.database.DailyPointDb;
 import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
@@ -17,22 +27,35 @@ import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.RawResourceDataSource;
 import com.google.android.exoplayer2.util.Util;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static android.content.Context.MODE_PRIVATE;
+import static com.example.breezy.helper.Tasks.getTasks;
+
 public class TaskFragment extends Fragment {
 
     @BindView(R.id.media_player) PlayerView media_player;
     @BindView(R.id.playing_song_name) TextView playing_song_name;
+    @BindView(R.id.exercise) TextView exercise;
+    @BindView(R.id.time_exercise) TextView time_exercise;
+    @BindView(R.id.meditation) TextView meditation;
+    @BindView(R.id.time_meditation) TextView time_meditation;
+    @BindView(R.id.meditate_done) ImageView meditate_done;
+    @BindView(R.id.exc_done) ImageView exc_done;
 
     private SimpleExoPlayer player;
-    private boolean playWhenReady = true;
+    private boolean playWhenReady = false;
     private int currentWindow = 0;
     private long playbackPosition = 0;
     private List<String> mediaTitle;
+    private String meditate_url;
 
     public TaskFragment() {
     }
@@ -43,10 +66,65 @@ public class TaskFragment extends Fragment {
 
         ButterKnife.bind(this, root);
 
+        SharedPreferences userPrefs = getContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        int valuePoints = userPrefs.getInt("ValuePoints", 0);
+
+        DailyDao dao = DailyPointDb.getInstance(getContext()).dailyDao();
+        boolean isExercise = dao.getExercise();
+        boolean isMeditate = dao.getMeditate();
+
+        if (isExercise)
+            exc_done.setImageDrawable(getResources().getDrawable(R.drawable.ic_done));
+        if (isMeditate)
+            meditate_done.setImageDrawable(getResources().getDrawable(R.drawable.ic_done));
+
+        try {
+            JSONObject tasksJson = getTasks(valuePoints);
+            exercise.setText(tasksJson.getString("Exercises"));
+            meditation.setText(tasksJson.getString("Meditation"));
+            time_exercise.setText("30 minutes");
+            time_meditation.setText(tasksJson.getString("medi_time") + " minutes");
+            meditate_url = tasksJson.getString("url");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         mediaTitle = Arrays.asList("Deep Meditation", "Earthly Music", "Relaxing Music", "Stars", "The Light", "Yoga", "Yoga Tune");
         playing_song_name.setText(mediaTitle.get(0));
 
+        meditate_done.setOnClickListener(view -> {
+            watchYoutubeVideo(getContext(), meditate_url);
+            if (!isMeditate) {
+                meditate_done.setImageDrawable(getResources().getDrawable(R.drawable.ic_done));
+                dao.updateMeditate(true);
+            }
+        });
+
+        exc_done.setOnClickListener(view -> {
+            if (!isExercise)
+                new AlertDialog.Builder(getContext())
+                        .setTitle("Have you completed the Exercise for 30 minutes?")
+                        .setCancelable(false)
+                        .setNegativeButton("No", null)
+                        .setPositiveButton("Yes", (dialogInterface, i) -> {
+                            exc_done.setImageDrawable(getResources().getDrawable(R.drawable.ic_done));
+                            dao.updateExercise(true);
+                        })
+                        .setIcon(R.drawable.circlebreezy)
+                        .show();
+        });
+
         return root;
+    }
+
+    public static void watchYoutubeVideo(Context context, String id){
+        Intent appIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:" + id));
+        Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=" + id));
+        try {
+            context.startActivity(appIntent);
+        } catch (ActivityNotFoundException ex) {
+            context.startActivity(webIntent);
+        }
     }
 
     private void initializePlayer() {
