@@ -157,7 +157,8 @@
                         android:buttonTint="@color/accent"
                         android:checked="true"
                         android:tag="yes"
-                        android:text="Yes" />
+                        android:text="Yes"
+                        android:textColor="@color/white"/>
 
                     <RadioButton
                         android:id="@+id/radioButton4"
@@ -166,7 +167,8 @@
                         android:layout_marginTop="20dp"
                         android:buttonTint="@color/accent"
                         android:tag="no"
-                        android:text="No" />
+                        android:text="No"
+                        android:textColor="@color/white"/>
                 </RadioGroup>
 
             </androidx.constraintlayout.widget.ConstraintLayout>

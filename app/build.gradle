@@ -41,6 +41,7 @@ repositories {
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.room:room-runtime:2.2.6'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -78,4 +79,5 @@ dependencies {
     //Room SQL
     implementation "android.arch.persistence.room:runtime:1.1.1"
     annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
+
 }
