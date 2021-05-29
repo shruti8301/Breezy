@@ -25,7 +25,10 @@ import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.RawResourceDataSource;
+import com.google.android.exoplayer2.util.Log;
 import com.google.android.exoplayer2.util.Util;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -52,7 +55,7 @@ public class TaskFragment extends Fragment {
 
     private SimpleExoPlayer player;
     private boolean playWhenReady = false;
-    private int currentWindow = 0;
+    private int temp, currentWindow = 0;
     private long playbackPosition = 0;
     private List<String> mediaTitle;
     private String meditate_url;
@@ -67,7 +70,9 @@ public class TaskFragment extends Fragment {
         ButterKnife.bind(this, root);
 
         SharedPreferences userPrefs = getContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor Ed = userPrefs.edit();
         int valuePoints = userPrefs.getInt("ValuePoints", 0);
+        temp = Integer.parseInt(userPrefs.getString("Points", "0"));
 
         DailyDao dao = DailyPointDb.getInstance(getContext()).dailyDao();
         boolean isExercise = dao.getExercise();
@@ -96,6 +101,10 @@ public class TaskFragment extends Fragment {
             watchYoutubeVideo(getContext(), meditate_url);
             if (!isMeditate) {
                 meditate_done.setImageDrawable(getResources().getDrawable(R.drawable.ic_done));
+                temp += 10;
+                Ed.putString("Points", String.valueOf(temp));
+                Ed.apply();
+                storeInFirebase(String.valueOf(temp));
                 dao.updateMeditate(true);
             }
         });
@@ -108,6 +117,10 @@ public class TaskFragment extends Fragment {
                         .setNegativeButton("No", null)
                         .setPositiveButton("Yes", (dialogInterface, i) -> {
                             exc_done.setImageDrawable(getResources().getDrawable(R.drawable.ic_done));
+                            temp += 10;
+                            Ed.putString("Points", String.valueOf(temp));
+                            Ed.apply();
+                            storeInFirebase(String.valueOf(temp));
                             dao.updateExercise(true);
                         })
                         .setIcon(R.drawable.circlebreezy)
@@ -115,6 +128,13 @@ public class TaskFragment extends Fragment {
         });
 
         return root;
+    }
+
+    private void storeInFirebase(String points) {
+        FirebaseDatabase.getInstance().getReference("Users")
+                .child(FirebaseAuth.getInstance().getUid())
+                .child("Points")
+                .setValue(points);
     }
 
     public static void watchYoutubeVideo(Context context, String id){
@@ -191,7 +211,7 @@ public class TaskFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        hideSystemUi();
+//        hideSystemUi();
         if ((Util.SDK_INT < 24 || player == null)) {
             initializePlayer();
         }
