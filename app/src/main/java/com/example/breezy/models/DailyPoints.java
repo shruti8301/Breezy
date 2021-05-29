@@ -11,7 +11,7 @@ public class DailyPoints {
     private long id;
 
     private int sleep, mood;
-    private boolean isHydrated;
+    private boolean isHydrated, exercise, meditation;
     private String date;
 
     public DailyPoints() {
@@ -63,5 +63,21 @@ public class DailyPoints {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public boolean isExercise() {
+        return exercise;
+    }
+
+    public void setExercise(boolean exercise) {
+        this.exercise = exercise;
+    }
+
+    public boolean isMeditation() {
+        return meditation;
+    }
+
+    public void setMeditation(boolean meditation) {
+        this.meditation = meditation;
     }
 }

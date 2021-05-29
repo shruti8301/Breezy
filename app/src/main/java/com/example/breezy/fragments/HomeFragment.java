@@ -52,6 +52,7 @@ public class HomeFragment extends Fragment {
     @BindView(R.id.graphView) LineChart graphView;
 
     private DailyDao dailyDao;
+    private SharedPreferences.Editor Ed;
 
     public HomeFragment() {
     }
@@ -63,6 +64,7 @@ public class HomeFragment extends Fragment {
         ButterKnife.bind(this, root);
 
         SharedPreferences userPrefs = getContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        Ed = userPrefs.edit();
         username.setText(userPrefs.getString("Name", "Name") + ",");
         detect_disease.setText(userPrefs.getString("Disease", "None"));
 
@@ -70,14 +72,18 @@ public class HomeFragment extends Fragment {
         String date = formatter.format(new Date());
 
         dailyDao = DailyPointDb.getInstance(getContext()).dailyDao();
-        try {
-            int valuePoints = getPoints(getContext());
-            Log.e("Info", valuePoints + "");
-        } catch (JSONException | InterruptedException e) {
-            e.printStackTrace();
-        }
         if (dailyDao.isDatePresent(date) == 0)
             showDailyDialog(date);
+        else {
+            try {
+                int valuePoints = getPoints(getContext());
+                Ed.putInt("ValuePoints", valuePoints);
+                Ed.apply();
+                Log.e("Info", valuePoints + "");
+            } catch (JSONException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 
         graphView.setDragEnabled(true);
         graphView.setScaleEnabled(true);
@@ -202,6 +208,14 @@ public class HomeFragment extends Fragment {
                 DailyPoints point = new DailyPoints(date, sleep_hours.get(), mood.get(), isHyderated.get());
                 dailyDao.insertDaily(point);
                 dailyDialog.dismiss();
+                try {
+                    int valuePoints = getPoints(getContext());
+                    Ed.putInt("ValuePoints", valuePoints);
+                    Ed.apply();
+                    Log.e("Info", valuePoints + "");
+                } catch (JSONException | InterruptedException e) {
+                    e.printStackTrace();
+                }
             } else
                 Snackbar.make(view, "Please select your mood!", Snackbar.LENGTH_LONG).show();
         });
