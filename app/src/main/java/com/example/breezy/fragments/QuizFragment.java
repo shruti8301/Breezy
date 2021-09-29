@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RadioGroup;
@@ -50,6 +52,7 @@ public class QuizFragment extends Fragment {
     private JSONObject currentQuestion;
     private List<String> allQuestions, temp;
     private Map<String, Integer> numberOfQues;
+    Animation fadeIn, fadeOut;
 
     public QuizFragment() {
     }
@@ -61,8 +64,11 @@ public class QuizFragment extends Fragment {
         ButterKnife.bind(this, root);
 
         confirm_btn_start.setOnClickListener(view -> {
-            //TODO : Set animation, cardView had to go left and the constraintlayout should appear from the right
+            fadeIn = AnimationUtils.loadAnimation(getContext(), R.anim.fadein);
+            fadeOut = AnimationUtils.loadAnimation(getContext(), R.anim.fadeout);
+            confirmation_cardView.setAnimation(fadeOut);
             confirmation_cardView.setVisibility(View.GONE);
+            main_ques_layout.setAnimation(fadeIn);
             main_ques_layout.setVisibility(View.VISIBLE);
         });
 
@@ -112,7 +118,7 @@ public class QuizFragment extends Fragment {
                     }
                     allQuestions = getQuestions(temp);
 
-                    if (allQuestions.size() == 0){
+                    if (allQuestions.size() == 0) {
                         SharedPreferences userPrefs = getContext().getSharedPreferences("UserPrefs", MODE_PRIVATE);
                         SharedPreferences.Editor Ed = userPrefs.edit();
                         Ed.putString("Disease", "You are super healthy");
@@ -151,7 +157,7 @@ public class QuizFragment extends Fragment {
             if (position == allQuestions.size() - 1) {
                 int maxValue = 0;
                 String finalDisease = null;
-                for (Map.Entry<String, Integer> entry : basicQuesPoints.entrySet()){
+                for (Map.Entry<String, Integer> entry : basicQuesPoints.entrySet()) {
                     if (entry.getValue() > maxValue) {
                         maxValue = entry.getValue();
                         finalDisease = entry.getKey();

@@ -121,7 +121,7 @@ public class HomeFragment extends Fragment {
             }
 
             if (graphPoints.get(listSize) > graphPoints.get(0))
-                status_health.setText("Improving!!!");
+                status_health.setText("Improving");
             else
                 status_health.setText("Deteriorating, take care!");
         }
