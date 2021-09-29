@@ -86,21 +86,19 @@
 
                     <com.airbnb.lottie.LottieAnimationView
                         android:id="@+id/profile_anim"
-                        android:layout_width="110dp"
-                        android:layout_height="110dp"
-                        android:layout_marginTop="16dp"
+                        android:layout_width="140dp"
+                        android:layout_height="140dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:lottie_autoPlay="true"
                         app:lottie_loop="true"
-                        app:lottie_rawRes="@raw/smiley" />
+                        app:lottie_rawRes="@raw/medal" />
 
                     <TextView
                         android:id="@+id/textView3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
                         android:text="Points"
                         android:layout_marginEnd="35dp"
                         android:textColor="@color/black"
@@ -113,7 +111,6 @@
                         android:id="@+id/profile_credit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
                         android:layout_marginBottom="16dp"
                         android:layout_marginStart="8dp"
                         android:text="50"
